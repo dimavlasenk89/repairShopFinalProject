@@ -115,7 +115,8 @@ public class ManageWatchOrdersServlet extends HttpServlet {
         List<Integer> ListId = new ArrayList<>();
         int masterOrdersId;
         String allMasterOrders = SELECT_ALL_ORDERS_BY_MASTER_LOGIN + "'" + masterLogin + "'";
-        try (Connection con = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection con = dbManager.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(allMasterOrders)) {
             while (rs.next()) {
@@ -131,7 +132,8 @@ public class ManageWatchOrdersServlet extends HttpServlet {
     public List<Integer> IdListPayment() {
         List<Integer> ListId = new ArrayList<>();
         int masterOrdersId;
-        try (Connection con = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection con = dbManager.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_ALL_ORDERS_BY_PAYMENT_STATUS)) {
             while (rs.next()) {
@@ -147,7 +149,8 @@ public class ManageWatchOrdersServlet extends HttpServlet {
     public List<Integer> IdListWaitingForPayment() {
         List<Integer> ListId = new ArrayList<>();
         int masterOrdersId;
-        try (Connection con = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection con = dbManager.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_ALL_ORDERS_BY_WAITING_FOR_PAYMENT_STATUS)) {
             while (rs.next()) {
@@ -163,7 +166,8 @@ public class ManageWatchOrdersServlet extends HttpServlet {
     public List<Integer> IdListCanceled() {
         List<Integer> ListId = new ArrayList<>();
         int masterOrdersId;
-        try (Connection con = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection con = dbManager.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_ALL_ORDERS_BY_CANCELED_STATUS)) {
             while (rs.next()) {

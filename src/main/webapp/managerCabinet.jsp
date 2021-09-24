@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -43,18 +42,18 @@
     <hr>
     <div class="row">
         <div>  <span>Відфільтруйте замовлення </span> <span name="congratulations">${congratulations}</span> </div>
-            <form method="get" action="ManageWatchOrdersServlet" class="row g-3">
-                <div class="col-1">
-                    </div>
+        <form method="get" action="ManageWatchOrdersServlet" class="row g-3">
+            <div class="col-1">
+            </div>
             <div class="col-5">
                 <div class="form-check">
-                    <input name="orderStatus" class="form-check-input" type="radio" value="option1" id="waitingForPaiment">
-                    <label class="form-check-label" for="waitingForPaiment">
+                    <input name="orderStatus" class="form-check-input" type="radio" value="option1" id="waitingForPayment">
+                    <label class="form-check-label" for="waitingForPayment">
                         Чекає на оплату
                     </label>
                 </div>
                 <div class="form-check">
-                    <input name="orderStatus" class="form-check-input" type="radio" value="option2" id="paid">
+                    <input name="orderStatus" class="form-check-input" type="radio" value="option2" id="paid" checked>
                     <label class="form-check-label" for="paid">
                         Сплачено
                     </label>
@@ -74,60 +73,106 @@
                 <input type="submit" class="btn btn-primary mb-3" value="Фільтрувати замовлення">
             </div>
         </form>
-        <div class="row">
-                <div class="col-1">
-                </div>
-                <div class="col-11">
-
-                    <table class="table">
-
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Замовник</th>
-                            <th scope="col">Дата</th>
-                            <th scope="col">Машина</th>
-                            <th scope="col">Майстер</th>
-                            <th scope="col">Статус</th>
-                            <th scope="col">Платіж</th>
-                            <th scope="col">Вартість</th>
-                            <th scope="col">Обсяг робіт</th>
-                            <form method="get" action="allOrdersManagerServlet" class="row g-3">
-                            <th scope="col"><input type="submit" class="btn btn-primary mb-3" value="Переглянути"></th>
+                    <div class="container">
+                        <hr>
+                        <div class="row">
+                            <div class="col-3">
+                            </div>
+                            <div>  <span>Усі замовники </span> </div>
+                            <form method="get" action="customersListServlet" class="row g-3">
+                                <div class="col-9">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Замовник</th>
+                                            <th scope="col">Рахунок</th>
+                                            <th scope="col">Поповнити</th>
+                                            <form method="get" action="customersListServlet" class="row g-3">
+                                                <th scope="col"><input type="submit" class="btn btn-primary mb-3" value="Переглянути"></th>
+                                            </form>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="Customer" items="${ListCustomers}">
+                                            <tr>
+                                                <th scope="row" >${Customer.id}</th>
+                                                <th scope="row">${Customer.login}</th>
+                                                <td><c:out value="${Customer.bill}" /></td>
+                                                    <form method="get" action="updateBillServlet" class="row g-3">
+                                                        <td>
+                                                            <input type="hidden" name="idInRow3" value="${Customer.id}">
+                                                            <input name="money" type="login" class="form-control form-control-sm" id="moneyCustomer" placeholder="Сума">
+                                                            <br>
+                                                            <input type="submit" class="btn btn-outline-warning btn-sm" value="Надіслати">
+                                                        </td>
+                                                    </form>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </form>
-                        </tr>
-                        </thead>
+                            <div class="row">
+                                <div class="col-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        <div class="row">
+            <div class="col-1">
+            </div>
+            <div>  <span>Усі замовлення </span> </div>
+            <div class="col-11">
 
-                        <tbody>
-                        <c:forEach var="orders" items="${ListOrders}">
-                            <tr>
-                                    <th scope="row" >${orders.id}</th>
-                                <th scope="row">${orders.customerLogin}</th>
-                                <td><c:out value="${orders.createdAt}" /></td>
-                                <td><c:out value="${orders.carType}" /></td>
-                                <c:if test="${orders.masterLogin == null}">
-                                    <form method="get" action="ChooseMasterServlet" class="row g-3">
+                <table class="table">
+
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Замовник</th>
+                        <th scope="col">Дата</th>
+                        <th scope="col">Машина</th>
+                        <th scope="col">Майстер</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Платіж</th>
+                        <th scope="col">Вартість</th>
+                        <th scope="col">Обсяг робіт</th>
+                        <form method="get" action="allOrdersManagerServlet" class="row g-3">
+                            <th scope="col"><input type="submit" class="btn btn-primary mb-3" value="Переглянути"></th>
+                        </form>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <c:forEach var="orders" items="${ListOrders}">
+                        <tr>
+                            <th scope="row" >${orders.id}</th>
+                            <th scope="row">${orders.customerLogin}</th>
+                            <td><c:out value="${orders.createdAt}" /></td>
+                            <td><c:out value="${orders.carType}" /></td>
+                            <c:if test="${orders.masterLogin == null}">
+                                <form method="get" action="ChooseMasterServlet" class="row g-3">
                                     <td>
                                         <input type="hidden" name="idInRow2" value="${orders.id}">
                                         <input name="masterLogin" type="login" class="form-control form-control-sm" id="masterLogin" placeholder="Майстер">
                                         <br>
                                         <input type="submit" class="btn btn-outline-warning btn-sm" value="Призначити">
                                     </td>
-                                    </form>
-                                </c:if>
-                                <c:if test="${orders.masterLogin != null}">
-                                    <td><c:out value="${orders.masterLogin}" /></td>
-                                </c:if>
-                                <c:if test="${(orders.isInDevelopment() == false) && (orders.isDone() == false)}">
-                                    <td>В очікуванні</td>
-                                </c:if>
-                                <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == false)}">
-                                    <td>В роботі</td>
-                                </c:if>
-                                <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == true)}">
-                                    <td>Виконано</td>
-                                </c:if>
-                                <c:if test="${((orders.isPaid() == false) && (orders.isCanceled() == false))}">
+                                </form>
+                            </c:if>
+                            <c:if test="${orders.masterLogin != null}">
+                                <td><c:out value="${orders.masterLogin}" /></td>
+                            </c:if>
+                            <c:if test="${(orders.isInDevelopment() == false) && (orders.isDone() == false)}">
+                                <td>В очікуванні</td>
+                            </c:if>
+                            <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == false)}">
+                                <td>В роботі</td>
+                            </c:if>
+                            <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == true)}">
+                                <td>Виконано</td>
+                            </c:if>
+                            <c:if test="${((orders.isPaid() == false) && (orders.isCanceled() == false))}">
                                 <form method="get" action="paymentStatusServlet" class="row g-3">
                                     <td>
                                         <input type="hidden" name="idInRow3" value="${orders.id}">
@@ -142,43 +187,42 @@
                                         <input type="submit" class="btn btn-outline-warning btn-sm" value="Призначити">
                                     </td>
                                 </form>
-                                </c:if>
-                                <c:if test="${((orders.isPaid() == true) && (orders.isCanceled() == false))}">
-                                    <td>Сплачено</td>
-                                </c:if>
-                                <c:if test="${orders.isCanceled() == true}">
-                                    <td>Відмінено</td>
-                                </c:if>
+                            </c:if>
+                            <c:if test="${((orders.isPaid() == true) && (orders.isCanceled() == false))}">
+                                <td>Сплачено</td>
+                            </c:if>
+                            <c:if test="${orders.isCanceled() == true}">
+                                <td>Відмінено</td>
+                            </c:if>
 
-                                <c:if test="${orders.ordersPrice > 0}">
-                                    <td><c:out value="${orders.ordersPrice} $" /></td>
-                                </c:if>
-                                <c:if test="${orders.ordersPrice == 0}">
-                                    <form method="get" action="ManageAllOrdersServlet" class="row g-3">
+                            <c:if test="${orders.ordersPrice > 0}">
+                                <td><c:out value="${orders.ordersPrice} $" /></td>
+                            </c:if>
+                            <c:if test="${orders.ordersPrice == 0}">
+                                <form method="get" action="ManageAllOrdersServlet" class="row g-3">
                                     <td>
                                         <input type="hidden" name="idInRow" value="${orders.id}">
                                         <input name="price" type="login" class="form-control form-control-sm" id="inputPrice" placeholder="Ціна">
                                         <br>
                                         <input type="submit" class="btn btn-outline-warning btn-sm" value="Призначити">
                                     </td>
-                                    </form>
-                                </c:if>
+                                </form>
+                            </c:if>
 
-                                <c:if test="${orders.isCheckEngine() == true}">
-                                    <td>Двигун</td>
-                                </c:if>
-                                <c:if test="${orders.isCheckElectricity() == true}">
-                                    <td>Електрика</td>
-                                </c:if>
-                                <c:if test="${orders.isCheckWheels() == true}">
-                                    <td>Ходова</td>
-                                </c:if>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-<%--            </form>--%>
+                            <c:if test="${orders.isCheckEngine() == true}">
+                                <td>Двигун</td>
+                            </c:if>
+                            <c:if test="${orders.isCheckElectricity() == true}">
+                                <td>Електрика</td>
+                            </c:if>
+                            <c:if test="${orders.isCheckWheels() == true}">
+                                <td>Ходова</td>
+                            </c:if>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <hr>
     </div>

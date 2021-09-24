@@ -84,7 +84,8 @@ public class showCustomerOrdersServlet extends HttpServlet {
         List<Integer> ListId = new ArrayList<>();
         int userOrdersId;
         String allUserOrders1 = SELECT_ALL_ORDERS_BY_LOGIN + "'" + login + "'";
-        try (Connection con = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection con = dbManager.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(allUserOrders1)) {
             while (rs.next()) {

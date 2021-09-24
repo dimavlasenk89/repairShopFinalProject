@@ -38,9 +38,9 @@ private DBManager() {
     throw new IllegalStateException("Cannot init DBManager", ex);
     }
 }
-private static DataSource ds;
+private DataSource ds;
 
-public static Connection getConnection() throws SQLException {
+public Connection getConnection() throws SQLException {
     return ds.getConnection();
 }
     //low level method
@@ -107,7 +107,8 @@ public static Connection getConnection() throws SQLException {
     }
     public List<Customer> CustomersList() {
         List<Customer> CustomerList = new ArrayList<>();
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(GET_ALL_CUSTOMERS)) {
             while (rs.next()) {
@@ -162,7 +163,8 @@ public static Connection getConnection() throws SQLException {
     }
     public List<Orders> OrdersList() {
         List<Orders> OrdersList = new ArrayList<>();
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
              Statement stmt = connection.createStatement();
              ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS)) {
             while (resultSet.next()) {

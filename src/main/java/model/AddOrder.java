@@ -15,7 +15,7 @@ public class AddOrder {
         Connection con = null;
         DBManager dbManager = DBManager.getInstance();
         try {
-            con = DBManager.getConnection();
+            con = dbManager.getConnection();
             dbManager.addOrder(con, order);
             con.commit();
         } catch (SQLException ex) {

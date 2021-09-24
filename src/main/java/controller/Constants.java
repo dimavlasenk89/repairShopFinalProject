@@ -46,6 +46,7 @@ public class Constants {
     public static final String MASTER_DONE_ORDER = "UPDATE orders SET masterLogin=?, is_done='1' WHERE id=?";
     public static final String MASTER_UPDATE_ORDER = "UPDATE orders SET masterLogin=?, is_in_development='1' WHERE id=?";
     public static final String PRICE_UPDATE_ORDER = "UPDATE orders SET ordersPrice=? WHERE id=?";
+    public static final String BILL_UPDATE_CUSTOMER = "UPDATE customers SET bill=? WHERE id=?";
     public static final String UPDATE_MASTER_BY_MANAGER = "UPDATE orders SET masterLogin=? WHERE id=?";
     public static final String UPDATE_PAYMENT_STATUS = "UPDATE orders SET is_waiting_for_payment='1' WHERE id=?";
     public static final String UPDATE_PAYMENT_STATUS_PAID = "UPDATE orders SET is_waiting_for_payment='0', is_paid='1' WHERE id=?";

@@ -40,10 +40,10 @@ public class allCustomersServlet extends HttpServlet {
         }
         session.setAttribute("cLogin", customerLogin);
 
-        Connection con = null;
+        Connection con;
         DBManager dbManager = DBManager.getInstance();
         try {
-            con = DBManager.getConnection();
+            con = dbManager.getConnection();
             String[] logins = dbManager.CustomersLoginArray();
             String[] passwords = dbManager.CustomersPasswordArray();
             con.commit();

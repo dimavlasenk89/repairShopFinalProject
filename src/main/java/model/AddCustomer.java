@@ -15,7 +15,8 @@ public class AddCustomer {
         Connection con = null;
         DBManager dbManager = DBManager.getInstance();
         try {
-            con = DBManager.getConnection();
+
+            con = dbManager.getConnection();
             dbManager.insertCustomer(con, customer);
             con.commit();
         } catch (SQLException ex) {
