@@ -74,19 +74,15 @@
                 <input type="submit" class="btn btn-primary mb-3" value="Зробити замовлення">
             </div>
         </form>
-
-
         <div class="row">
                 <div class="col-1">
                 </div>
                 <div class="col-11">
-
                     <table class="table">
-
                         <thead>
                         <form method="get" action="showCustomerOrdersServlet" class="row g-3">
                         <tr>
-                            <th scope="col">Написати відгук</th>
+                            <th scope="col-4">Написати відгук</th>
                             <th scope="col">Залишити відгук</th>
                             <th scope="col">#</th>
                             <th scope="col">Дата</th>
@@ -104,12 +100,11 @@
                         <c:forEach var="orders" items="${ListOrdersByCustomer}">
                         <tr>
                             <form method="get" action="AddReferenceServlet" class="row g-3">
-                            <td><textarea class="form-control" name="Textarea" id="FormControlTextarea" rows="3"></textarea></td>
+                            <td><textarea class="form-control" name="Textarea" id="FormControlTextarea" cols="15" rows="2"></textarea></td>
                             <c:if test="${orders.isDone() == true}">
                                 <td>
                                     <input type="hidden" name="id" value="${orders.id}">
                                     <input type="submit" class="btn btn-outline-primary btn-lg" value="Відгук">
-<%--                                    <button type="button" class="btn btn-outline-primary btn-lg">Відгук</button>--%>
                                 </td>
                             </c:if>
                             </form>
@@ -131,7 +126,7 @@
                             <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == false)}">
                                 <td>В роботі</td>
                             </c:if>
-                            <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == true)}">
+                            <c:if test="${orders.isDone() == true}">
                                 <td>Виконано</td>
                             </c:if>
                             <c:if test="${((orders.isPaid() == false) && (orders.isCanceled() == false))}">

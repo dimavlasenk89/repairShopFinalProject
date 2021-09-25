@@ -175,6 +175,90 @@ public Connection getConnection() throws SQLException {
         }
         return OrdersList;
     }
+    public List<Orders> OrdersListOrderByPriceASC() {
+        List<Orders> OrdersListPriceASC = new ArrayList<>();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_PRICE_ASC)) {
+            while (resultSet.next()) {
+                OrdersListPriceASC.add(mapOrders(resultSet));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger("logger1").log(Level.SEVERE, "Something went wrong in AllOrders1");
+        }
+        return OrdersListPriceASC;
+    }
+    public List<Orders> OrdersListOrderByPriceDESC() {
+        List<Orders> OrdersListPriceDESC = new ArrayList<>();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_PRICE_DESC)) {
+            while (resultSet.next()) {
+                OrdersListPriceDESC.add(mapOrders(resultSet));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger("logger2").log(Level.SEVERE, "Something went wrong in AllOrders2");
+        }
+        return OrdersListPriceDESC;
+    }
+    public List<Orders> OrdersListOrderByDataASC() {
+        List<Orders> OrdersListDataASC = new ArrayList<>();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_PRICE_ASC)) {
+            while (resultSet.next()) {
+                OrdersListDataASC.add(mapOrders(resultSet));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger("logger3").log(Level.SEVERE, "Something went wrong in AllOrders3");
+        }
+        return OrdersListDataASC;
+    }
+    public List<Orders> OrdersListOrderByDataDESC() {
+        List<Orders> OrdersListDataDESC = new ArrayList<>();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_PRICE_DESC)) {
+            while (resultSet.next()) {
+                OrdersListDataDESC.add(mapOrders(resultSet));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger("logger4").log(Level.SEVERE, "Something went wrong in AllOrders4");
+        }
+        return OrdersListDataDESC;
+    }
+    public List<Orders> OrdersListOrderByDoneDESC() {
+        List<Orders> OrdersListDoneDESC = new ArrayList<>();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_DONE_DESC)) {
+            while (resultSet.next()) {
+                OrdersListDoneDESC.add(mapOrders(resultSet));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger("logger5").log(Level.SEVERE, "Something went wrong in AllOrders5");
+        }
+        return OrdersListDoneDESC;
+    }
+    public List<Orders> OrdersListOrderByDevDESC() {
+        List<Orders> OrdersListDevDESC = new ArrayList<>();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_DEV_DESC)) {
+            while (resultSet.next()) {
+                OrdersListDevDESC.add(mapOrders(resultSet));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger("logger6").log(Level.SEVERE, "Something went wrong in AllOrders6");
+        }
+        return OrdersListDevDESC;
+    }
     public Orders mapOrders (ResultSet rs) throws SQLException {
         Orders orders = new Orders();
         orders.setId(rs.getInt(USER_ID_STRING));

@@ -69,6 +69,7 @@ public class newOrderServlet extends HttpServlet {
                 AddOrder addOrder = new AddOrder();
                 addOrder.AddOrderModel(orders);
                 req.setAttribute("successOrder", "Вітаємо! Ваша заявка прийнята!");
+                req.setAttribute("back", "Назад");
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("services.jsp");
                 requestDispatcher.forward(req, resp);
         } else {

@@ -123,26 +123,44 @@
             </div>
             <div>  <span>Усі замовлення </span> </div>
             <div class="col-11">
-
                 <table class="table">
-
                     <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Замовник</th>
-                        <th scope="col">Дата</th>
+                        <th scope="col">
+                            <form method="get" action="allOrdersSelectByDataASCServlet" class="row g-3">
+                                <input type="submit" class="btn btn-primary mb-3 btn-sm" value="Дата <">
+                            </form>
+                            <form method="get" action="allOrdersSelectByDataDESCServlet" class="row g-3">
+                                <input type="submit" class="btn btn-primary mb-3 btn-sm" value="Дата >">
+                            </form>
+                        </th>
                         <th scope="col">Машина</th>
                         <th scope="col">Майстер</th>
-                        <th scope="col">Статус</th>
+                        <th scope="col">
+                            <form method="get" action="allOrdersSelectByDoneDESCServlet" class="row g-3">
+                                <input type="submit" class="btn btn-primary mb-3 btn-sm" value="Статус +">
+                            </form>
+                            <form method="get" action="allOrdersSelectByDevDESCServlet" class="row g-3">
+                                <input type="submit" class="btn btn-primary mb-3 btn-sm" value="Статус -">
+                            </form>
+                        </th>
                         <th scope="col">Платіж</th>
-                        <th scope="col">Вартість</th>
+                        <th scope="col">
+                            <form method="get" action="allOrdersSelectByPriceASCServlet" class="row g-3">
+                            <input type="submit" class="btn btn-primary mb-3 btn-sm" value="Вартість <">
+                            </form>
+                            <form method="get" action="allOrdersSelectByPriceDESCServlet" class="row g-3">
+                            <input type="submit" class="btn btn-primary mb-3 btn-sm" value="Вартість >">
+                            </form>
+                        </th>
                         <th scope="col">Обсяг робіт</th>
                         <form method="get" action="allOrdersManagerServlet" class="row g-3">
-                            <th scope="col"><input type="submit" class="btn btn-primary mb-3" value="Переглянути"></th>
+                            <th scope="col"><input type="submit" class="btn btn-primary mb-3 btn-lg" value="Переглянути"></th>
                         </form>
                     </tr>
                     </thead>
-
                     <tbody>
                     <c:forEach var="orders" items="${ListOrders}">
                         <tr>
@@ -169,7 +187,7 @@
                             <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == false)}">
                                 <td>В роботі</td>
                             </c:if>
-                            <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == true)}">
+                            <c:if test="${orders.isDone() == true}">
                                 <td>Виконано</td>
                             </c:if>
                             <c:if test="${((orders.isPaid() == false) && (orders.isCanceled() == false))}">

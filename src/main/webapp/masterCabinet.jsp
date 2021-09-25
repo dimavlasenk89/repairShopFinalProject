@@ -102,7 +102,7 @@
                             <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == false)}">
                                 <td>В роботі</td>
                             </c:if>
-                            <c:if test="${(orders.isInDevelopment() == true) && (orders.isDone() == true)}">
+                            <c:if test="${orders.isDone() == true}">
                                 <td>Виконано</td>
                             </c:if>
                             <c:if test="${((orders.isPaid() == false) && (orders.isCanceled() == false))}">

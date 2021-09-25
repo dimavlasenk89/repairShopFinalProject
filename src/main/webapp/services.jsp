@@ -40,6 +40,7 @@
 </nav>
 <div class="jumbotron big-banner" style="background-image: url(img/background.jpg); height: 500px; padding-top: 150px;">
     <div><h3><b>${successOrder}</b></h3></div>
+    <div><h3><a id="link1" href="userCabinet.jsp" style="color: rgb(255, 255, 255)">${back}</a></h3></div>
     <iframe loading="lazy" title="John Coltrane - Blue Train (From The Rough Guide To John Coltrane) by World Music Network" width="640" height="200" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?visual=false&#038;url=https%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F70062910&#038;show_artwork=true&#038;maxheight=960&#038;maxwidth=640&#038;auto_play=false&#038;buying=true&#038;liking=true&#038;download=true&#038;sharing=true&#038;show_comments=true&#038;show_playcount=true&#038;show_user=true&#038;color"></iframe>
 </div>
 

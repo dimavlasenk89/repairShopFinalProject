@@ -45,7 +45,7 @@ public class Constants {
             "where o.CustomerLogin=c.login and c.login=";
     public static final String SELECT_MANAGER_BY_LOGIN = "SELECT id, login, password FROM repair_shop.managers where login=?";
     public static final String SELECT_MASTER_BY_LOGIN = "SELECT id, login, password, rating FROM repair_shop.masters where login=?";
-    public static final String MASTER_DONE_ORDER = "UPDATE orders SET masterLogin=?, is_done='1' WHERE id=?";
+    public static final String MASTER_DONE_ORDER = "UPDATE orders SET masterLogin=?, is_in_development='0', is_done='1' WHERE id=?";
     public static final String MASTER_UPDATE_ORDER = "UPDATE orders SET masterLogin=?, is_in_development='1' WHERE id=?";
     public static final String PRICE_UPDATE_ORDER = "UPDATE orders SET ordersPrice=? WHERE id=?";
     public static final String BILL_UPDATE_CUSTOMER = "UPDATE customers SET bill=? WHERE id=?";
@@ -55,6 +55,13 @@ public class Constants {
     public static final String UPDATE_PAYMENT_STATUS = "UPDATE orders SET is_waiting_for_payment='1' WHERE id=?";
     public static final String UPDATE_PAYMENT_STATUS_PAID = "UPDATE orders SET is_waiting_for_payment='0', is_paid='1' WHERE id=?";
     public static final String UPDATE_PAYMENT_STATUS_CANCELED = "UPDATE orders SET is_waiting_for_payment='0', is_paid='0', is_canceled='1' WHERE id=?";
+    public static final String SELECT_ALL_ORDERS_ORDER_BY_PRICE_DESC = "SELECT * FROM repair_shop.orders ORDER BY ordersPrice DESC";
+    public static final String SELECT_ALL_ORDERS_ORDER_BY_PRICE_ASC = "SELECT * FROM repair_shop.orders ORDER BY ordersPrice ASC";
+    public static final String SELECT_ALL_ORDERS_ORDER_BY_DATA_DESC = "SELECT * FROM repair_shop.orders ORDER BY CreatedAt DESC";
+    public static final String SELECT_ALL_ORDERS_ORDER_BY_DATA_ASC = "SELECT * FROM repair_shop.orders ORDER BY CreatedAt ASC";
+    public static final String SELECT_ALL_ORDERS_ORDER_BY_PAYMENT_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_paid DESC";
+    public static final String SELECT_ALL_ORDERS_ORDER_BY_DONE_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_done DESC";
+    public static final String SELECT_ALL_ORDERS_ORDER_BY_DEV_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_in_development DESC";
 }
 
 

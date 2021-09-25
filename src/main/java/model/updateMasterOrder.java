@@ -32,7 +32,7 @@ public class updateMasterOrder {
         DBManager dbManag = DBManager.getInstance();
         try (Connection con = dbManag.getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement psmt = con.prepareStatement(MASTER_DONE_ORDER, ResultSet.CONCUR_UPDATABLE)) {
+             PreparedStatement psmt = con.prepareStatement(MASTER_DONE_ORDER)) {
             int k = 1;
             psmt.setString(k++, login);
             psmt.setInt(k++, id);
