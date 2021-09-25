@@ -1,5 +1,5 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="uk">
@@ -12,6 +12,12 @@
     <link rel="shortcut icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="stylem.css">
+<%--    <style>--%>
+<%--        body {--%>
+<%--            background-image: url(img/background.jpg); /* Путь к фоновому изображению */--%>
+<%--            background-color: #c7b39b; /* Цвет фона */--%>
+<%--        }--%>
+<%--    </style>--%>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -38,11 +44,45 @@
         </div>
     </div>
 </nav>
+<div class="jumbotron">
+<%--<div class="jumbotron" style="background-image: url(img/background.jpg); background-size: 100%;">--%>
+<%--    <div class="form-group">--%>
+<%--        <label for="exampleFormControlTextarea1">Пример текстового поля</label>--%>
+<%--        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>--%>
+<%--    </div>--%>
 
-        <div>
-                <img src="img/team.jpg" class="img-fluid">
-        </div>
+<%--    <div class="col-4">--%>
+<%--    </div>--%>
+    <form method="get" action="showReferencesServlet" class="row g-3">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col-1">#</th>
+                    <th scope="col-2">Майстер</th>
+                    <th scope="col-8">Відгук</th>
+                    <th scope="col-1"><input type="submit" class="btn btn-primary mb-3" value="Переглянути"></th>
+                </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="orders" items="${ListOrders}">
+                <tr>
+                    <th scope="row">${orders.id}</th>
+                    <td><c:out value="${orders.masterLogin}" /></td>
+                    <td><c:out value="${orders.masterReference}" /></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    </form>
 
+
+
+
+
+
+</div>
 <div class="container-fluid">
     <div class="row text-center alert">
         <div class="col-12">
@@ -52,6 +92,7 @@
         <hr>
     </div>
 </div>
+
 <div class="card">
     <div class="card-footer">
         <div class="row text-center alert">

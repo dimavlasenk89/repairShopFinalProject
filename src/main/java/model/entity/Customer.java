@@ -9,6 +9,13 @@ public class Customer implements Serializable {
     private transient String password;
     private int bill;
 
+    public Customer() {
+    }
+
+    public Customer(int bill) {
+        this.bill = bill;
+    }
+
     public int getId() {
         return id;
     }

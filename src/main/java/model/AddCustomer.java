@@ -15,7 +15,6 @@ public class AddCustomer {
         Connection con = null;
         DBManager dbManager = DBManager.getInstance();
         try {
-
             con = dbManager.getConnection();
             dbManager.insertCustomer(con, customer);
             con.commit();

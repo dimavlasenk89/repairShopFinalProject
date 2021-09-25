@@ -1,7 +1,6 @@
 package controller;
 
         import model.updateBillByManager;
-        import model.updatePrice;
 
         import javax.servlet.RequestDispatcher;
         import javax.servlet.ServletException;
@@ -13,7 +12,7 @@ package controller;
         import static java.lang.Integer.parseInt;
 
 /**
- * Servlet for managing price on table with all orders,
+ * Servlet for top up customer's bill on table with all customers,
  * works on manager's cabinet page
  */
 @WebServlet(
@@ -24,20 +23,11 @@ public class updateBillServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String popUp = req.getParameter("money");
         String customerId = req.getParameter("idInRow3");
-
-//        if ((orderPrice != null) && (orderPrice != "")) {
-
             int money = parseInt(popUp);
             int id = parseInt(customerId);
             updateBillByManager updBill = new updateBillByManager();
             updBill.updateBill(money, id);
             RequestDispatcher requestDispatcher1 = req.getRequestDispatcher("managerCabinet.jsp");
             requestDispatcher1.forward(req, resp);
-
-//        } else {
-//            RequestDispatcher requestDispatcher2 = req.getRequestDispatcher("managerCabinet.jsp");
-//            requestDispatcher2.forward(req, resp);
-//        }
-
     }
 }

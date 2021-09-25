@@ -21,6 +21,9 @@ public class Orders implements Serializable {
     private String masterReference;
 
 
+    public Orders(int ordersPrice) {
+        this.ordersPrice = ordersPrice;
+    }
 
     public Orders() {
     }

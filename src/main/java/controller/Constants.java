@@ -39,6 +39,8 @@ public class Constants {
     public static final String SELECT_ORDER_BY_ID = "SELECT is_in_development, is_done, is_paid, is_waiting_for_payment, is_canceled, " +
             "is_CheckEngine, is_CheckElectricity, is_CheckWheels, Id, ordersPrice, CustomerLogin, masterLogin, createdAt, car_type, master_reference " +
             "FROM repair_shop.orders where Id=?";
+    public static final String SELECT_ORDER_PRICE_BY_ID = "SELECT ordersPrice FROM repair_shop.orders where Id=?";
+    public static final String SELECT_BILL_BY_LOGIN = "SELECT bill FROM repair_shop.customers where login=?";
     public static final String SELECT_ALL_ORDERS_BY_LOGIN = "select o.* from repair_shop.orders o, repair_shop.customers c " +
             "where o.CustomerLogin=c.login and c.login=";
     public static final String SELECT_MANAGER_BY_LOGIN = "SELECT id, login, password FROM repair_shop.managers where login=?";
@@ -47,6 +49,8 @@ public class Constants {
     public static final String MASTER_UPDATE_ORDER = "UPDATE orders SET masterLogin=?, is_in_development='1' WHERE id=?";
     public static final String PRICE_UPDATE_ORDER = "UPDATE orders SET ordersPrice=? WHERE id=?";
     public static final String BILL_UPDATE_CUSTOMER = "UPDATE customers SET bill=? WHERE id=?";
+    public static final String BILL_UPDATE = "UPDATE customers SET bill=? WHERE login=?";
+    public static final String REFERENCE_UPDATE = "UPDATE orders SET master_reference=? WHERE id=?";
     public static final String UPDATE_MASTER_BY_MANAGER = "UPDATE orders SET masterLogin=? WHERE id=?";
     public static final String UPDATE_PAYMENT_STATUS = "UPDATE orders SET is_waiting_for_payment='1' WHERE id=?";
     public static final String UPDATE_PAYMENT_STATUS_PAID = "UPDATE orders SET is_waiting_for_payment='0', is_paid='1' WHERE id=?";
