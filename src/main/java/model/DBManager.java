@@ -208,7 +208,7 @@ public Connection getConnection() throws SQLException {
         DBManager dbManager = DBManager.getInstance();
         try (Connection connection = dbManager.getConnection();
              Statement stmt = connection.createStatement();
-             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_PRICE_ASC)) {
+             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_DATA_ASC)) {
             while (resultSet.next()) {
                 OrdersListDataASC.add(mapOrders(resultSet));
             }
@@ -222,7 +222,7 @@ public Connection getConnection() throws SQLException {
         DBManager dbManager = DBManager.getInstance();
         try (Connection connection = dbManager.getConnection();
              Statement stmt = connection.createStatement();
-             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_PRICE_DESC)) {
+             ResultSet resultSet = stmt.executeQuery(SELECT_ALL_ORDERS_ORDER_BY_DATA_DESC)) {
             while (resultSet.next()) {
                 OrdersListDataDESC.add(mapOrders(resultSet));
             }
@@ -258,6 +258,23 @@ public Connection getConnection() throws SQLException {
             Logger.getLogger("logger6").log(Level.SEVERE, "Something went wrong in AllOrders6");
         }
         return OrdersListDevDESC;
+    }
+    public List<Orders> OrdersListByPagination(int begin, int records) {
+        List<Orders> OrdersListPagination = new ArrayList<>();
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection connection = dbManager.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDERS_FOR_PAGINATION, Statement.RETURN_GENERATED_KEYS)) {
+                int k = 1;
+                preparedStatement.setInt(k++, begin);
+                preparedStatement.setInt(k++, records);
+                ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                OrdersListPagination.add(mapOrders(rs));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger("logger7").log(Level.SEVERE, "Something went wrong in AllOrders7");
+        }
+        return OrdersListPagination;
     }
     public Orders mapOrders (ResultSet rs) throws SQLException {
         Orders orders = new Orders();

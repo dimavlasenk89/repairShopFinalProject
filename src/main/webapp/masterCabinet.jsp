@@ -62,7 +62,7 @@
         </form>
         <div>  ${master} </div>
         <div class="row">
-            <form method="get" action="ShowAllOrdersServlet" class="row g-3">
+            <form method="get" action="PaginationMasterServlet" class="row g-3">
                 <div class="col-1">
                 </div>
                 <div class="col-11">
@@ -84,7 +84,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="orders" items="${ListOrders}">
+                        <c:forEach var="orders" items="${ordersList}">
                         <tr>
                             <th scope="row">${orders.id}</th>
                             <th scope="row">${orders.customerLogin}</th>
@@ -128,12 +128,30 @@
                         </c:forEach>
                         </tbody>
                     </table>
+                    <c:if test="${currentPage != 1}">
+                        <td><a href="PaginationMasterServlet?page=${currentPage - 1}">Назад</a></td>
+                    </c:if>
+                    <table border="1" cellpadding="5" cellspacing="5">
+                        <tr>
+                            <c:forEach begin="1" end="${noOfPages}" var="i">
+                                <c:choose>
+                                    <c:when test="${currentPage eq i}">
+                                        <td>${i}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td><a href="PaginationMasterServlet?page=${i}">${i}</a></td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </tr>
+                    </table>
+                    <c:if test="${currentPage lt noOfPages}">
+                        <td><a href="PaginationMasterServlet?page=${currentPage + 1}">Вперед</a></td>
+                    </c:if>
                 </div>
             </form>
         </div>
         <hr>
-
-
     </div>
 </div>
 <div class="container-fluid">

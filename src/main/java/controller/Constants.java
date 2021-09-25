@@ -62,6 +62,7 @@ public class Constants {
     public static final String SELECT_ALL_ORDERS_ORDER_BY_PAYMENT_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_paid DESC";
     public static final String SELECT_ALL_ORDERS_ORDER_BY_DONE_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_done DESC";
     public static final String SELECT_ALL_ORDERS_ORDER_BY_DEV_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_in_development DESC";
+    public static final String SELECT_ORDERS_FOR_PAGINATION = "SELECT SQL_CALC_FOUND_ROWS * from repair_shop.orders limit ?, ?;";
 }
 
 
