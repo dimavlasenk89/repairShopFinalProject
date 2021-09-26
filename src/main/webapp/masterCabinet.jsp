@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="mt" uri="http://com/my/mt" %>
 
 <!DOCTYPE html>
 <html lang="uk">
@@ -43,6 +44,10 @@
     <hr>
     <div class="row">
         <div>  <span>Оберіть замовлення </span> <span name="congratulations">${congratulations}</span> </div>
+        <div>
+            <br>
+            <mt:newTag/>
+        </div>
             <form method="get" action="masterStatusServlet" class="row g-3">
                 <div class="col-1">
                     </div>

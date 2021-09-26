@@ -39,7 +39,6 @@ public class Constants {
     public static final String SELECT_ORDER_BY_ID = "SELECT is_in_development, is_done, is_paid, is_waiting_for_payment, is_canceled, " +
             "is_CheckEngine, is_CheckElectricity, is_CheckWheels, Id, ordersPrice, CustomerLogin, masterLogin, createdAt, car_type, master_reference " +
             "FROM repair_shop.orders where Id=?";
-    public static final String SELECT_ORDER_PRICE_BY_ID = "SELECT ordersPrice FROM repair_shop.orders where Id=?";
     public static final String SELECT_BILL_BY_LOGIN = "SELECT bill FROM repair_shop.customers where login=?";
     public static final String SELECT_ALL_ORDERS_BY_LOGIN = "select o.* from repair_shop.orders o, repair_shop.customers c " +
             "where o.CustomerLogin=c.login and c.login=";
@@ -59,18 +58,8 @@ public class Constants {
     public static final String SELECT_ALL_ORDERS_ORDER_BY_PRICE_ASC = "SELECT * FROM repair_shop.orders ORDER BY ordersPrice ASC";
     public static final String SELECT_ALL_ORDERS_ORDER_BY_DATA_DESC = "SELECT * FROM repair_shop.orders ORDER BY CreatedAt DESC";
     public static final String SELECT_ALL_ORDERS_ORDER_BY_DATA_ASC = "SELECT * FROM repair_shop.orders ORDER BY CreatedAt ASC";
-    public static final String SELECT_ALL_ORDERS_ORDER_BY_PAYMENT_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_paid DESC";
     public static final String SELECT_ALL_ORDERS_ORDER_BY_DONE_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_done DESC";
     public static final String SELECT_ALL_ORDERS_ORDER_BY_DEV_DESC = "SELECT * FROM repair_shop.orders ORDER BY is_in_development DESC";
-    public static final String SELECT_ORDERS_FOR_PAGINATION = "SELECT SQL_CALC_FOUND_ROWS * from repair_shop.orders limit ?, ?;";
+    public static final String SELECT_ORDERS_FOR_PAGINATION = "SELECT SQL_CALC_FOUND_ROWS * from repair_shop.orders limit ?, ?";
+    public static final String SELECT_ROWS_ORDERS_FOR_PAGINATION = "SELECT FOUND_ROWS()";
 }
-
-
-
-//    public static final String SELECT_ORDER_BY_LOGIN = "SELECT is_in_development, is_done, is_paid, is_waiting_for_payment, is_canceled, " +
-//            "is_CheckEngine, is_CheckElectricity, is_CheckWheels, ordersPrice, masterLogin, createdAt, car_type " +
-//            "FROM repair_shop.orders where CustomerLogin=?";
-//public static final String SELECT_ORDER_BY_MASTER_LOGIN = "SELECT is_in_development, is_done, is_paid, is_waiting_for_payment, is_canceled, " +
-//        "is_CheckEngine, is_CheckElectricity, is_CheckWheels, ordersPrice, CustomerLogin, createdAt, car_type, master_reference " +
-//        "FROM repair_shop.orders where masterLogin=";
-//public static final String ALL_USER_ORDERS = "select o.* from repair_shop.orders o, repair_shop.customers c where o.CustomerLogin=c.login and c.login=?";

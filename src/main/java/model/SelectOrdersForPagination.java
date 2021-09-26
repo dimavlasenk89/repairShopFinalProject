@@ -3,11 +3,11 @@ package model;
 import model.entity.Orders;
 
 import java.sql.*;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static controller.Constants.SELECT_ORDERS_FOR_PAGINATION;
+import static controller.Constants.SELECT_ROWS_ORDERS_FOR_PAGINATION;
 
 public class SelectOrdersForPagination {
     public int noOfRecords;
@@ -46,7 +46,7 @@ public class SelectOrdersForPagination {
             }
             rs.close();
 
-            rs = preparedStatement.executeQuery("SELECT FOUND_ROWS()");
+            rs = preparedStatement.executeQuery(SELECT_ROWS_ORDERS_FOR_PAGINATION);
             if(rs.next())
                 noOfRecords = rs.getInt(1);
         } catch (SQLException e) {

@@ -116,31 +116,3 @@
 <script src="main.js"></script>
 </body>
 </html>
-
-<%--<!DOCTYPE html>--%>
-<%--<html lang="ru">--%>
-<%--<head>--%>
-<%--    <meta charset="UTF-8">--%>
-<%--    <title>Repair Shop</title>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<center>--%>
-<%--    <h1>--%>
-<%--        Select the type of Liquor--%>
-<%--    </h1>--%>
-<%--    <form method="post" action="SelectRole">--%>
-<%--        <br>--%>
-<%--        <select name="Type" size="1">--%>
-<%--            <option>CUSTOMER</option>--%>
-<%--            <option>MASTER</option>--%>
-<%--            <option>MANAGER</option>--%>
-
-<%--        </select>--%>
-<%--        <br><br>--%>
-<%--        <input type="submit" value="Подтвердить выбор">--%>
-<%--    </form>--%>
-<%--</center>--%>
-
-
-<%--</body>--%>
-<%--</html>--%>
