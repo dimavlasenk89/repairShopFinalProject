@@ -1,6 +1,7 @@
 package controller;
 
 import model.DBManager;
+import model.entity.Customer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,13 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.*;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static controller.Constants.USER_LOGIN_STRING;
-import static controller.Constants.USER_PASSWORD_STRING;
-
+import static controller.Constants.*;
 
 /**
  * Servlet for entry to customer's cabinet,
@@ -26,73 +25,71 @@ import static controller.Constants.USER_PASSWORD_STRING;
         name = "/allCustomersServlet",
         urlPatterns = "/allCustomersServlet"
 )
-
 public class allCustomersServlet extends HttpServlet {
-    public String loginValue;
-
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userloginString = req.getParameter(USER_LOGIN_STRING);
+    String cLogin;
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("cLogin");
+        session.removeAttribute("cBill");
+        String cLoginString = req.getParameter(USER_LOGIN_STRING);
+        String managerPasswordString = req.getParameter(USER_PASSWORD_STRING);
+
         String customerLogin = (String) session.getAttribute("cLogin");
         if (customerLogin == null) {
-            customerLogin = userloginString;
+            customerLogin = cLoginString;
         }
+        Customer cus = selectCustomerByLogin(customerLogin);
+        int customerBill = cus.getBill();
+        String cBill = "Ваш рахунок " + customerBill + " $";
         session.setAttribute("cLogin", customerLogin);
-
-        Connection con;
-        DBManager dbManager = DBManager.getInstance();
-        try {
-            con = dbManager.getConnection();
-            String[] logins = dbManager.CustomersLoginArray();
-            String[] passwords = dbManager.CustomersPasswordArray();
-            con.commit();
-            HashMap<Integer, String> loginInfo = new HashMap<>();
-            HashMap<Integer, String> passwordInfo = new HashMap<>();
-            ArrayList<String> log = new ArrayList<>(Arrays.asList(logins));
-            ArrayList<String> pas = new ArrayList<>(Arrays.asList(passwords));
-            Iterator<String> iterator = log.iterator();
-            Integer key = 0;
-            while (iterator.hasNext()) {
-                loginInfo.put(key, iterator.next());
-                key++;
-            }
-            Iterator<String> passIter = pas.iterator();
-            Integer keyPass = 0;
-            while (passIter.hasNext()) {
-                passwordInfo.put(keyPass, passIter.next());
-                keyPass++;
-            }
-
-            loginValue = req.getParameter(USER_LOGIN_STRING);
-            String passwordValue = req.getParameter(USER_PASSWORD_STRING);
-            int k = 0;
-            if (loginInfo.containsValue(loginValue)) {
-                for (String string: loginInfo.values()) {
-                    if (loginValue.equals(string)) {
-                        break;
-                    }
-                    k++;
-                }
-            }
-
-            String loginFromMap = loginInfo.get(k);
-            String passwordFromMap = passwordInfo.get(k);
-
-            if (loginFromMap.equals(loginValue) && (passwordFromMap.equals(passwordValue))) {
-                 req.setAttribute("congratulations", loginValue);
-                 RequestDispatcher view = req.getRequestDispatcher("userCabinet.jsp");
-                 view.forward(req, resp);
-
-             }
-             else {
-                 req.setAttribute("errorAccessMessage", "невірний логін або пароль");
-                 RequestDispatcher view2 = req.getRequestDispatcher("signInPage.jsp");
-                 view2.forward(req, resp);
-             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        session.setAttribute("cBill", cBill);
+        if (cus != null) {
+            cLogin = cus.getLogin();
+        }         else {
+            req.setAttribute("errorAccessMessage", "невірний логін");
+            RequestDispatcher view2 = req.getRequestDispatcher("signInPage.jsp");
+            view2.forward(req, resp);
         }
+        String adminPassword = cus.getPassword();
+        if (cLogin.equals(cLoginString)) {
+            if (cLogin.equals(cLoginString) && (adminPassword.equals(managerPasswordString))) {
+                req.setAttribute("congratulations", cLoginString);
+                req.setAttribute("bill", cBill);
+                RequestDispatcher view = req.getRequestDispatcher("userCabinet.jsp");
+                view.forward(req, resp);
+            }
+            else {
+                req.setAttribute("errorAccessMessage", "невірний пароль");
+                RequestDispatcher view2 = req.getRequestDispatcher("signInPage.jsp");
+                view2.forward(req, resp);
+            }
+        }
+    }
+    public Customer selectCustomerByLogin(String login) {
+        Customer customer  = null;
+        // Step 1: Establishing a Connection
+        DBManager dbManager = DBManager.getInstance();
+        try (Connection conn = dbManager.getConnection();
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = conn.prepareStatement(SELECT_CUSTOMER_BY_LOGIN, Statement.RETURN_GENERATED_KEYS)) {
+            int k = 1;
+            preparedStatement.setString(k++, login);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int bill = rs.getInt("bill");
+                String customerLogin = rs.getString("login");
+                String password = rs.getString("password");
+                customer = new Customer(id, bill, customerLogin, password);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger("logs").log(Level.SEVERE, "Something went wrong in allCustomersServlet");
+        }
+        return customer;
     }
 }
 

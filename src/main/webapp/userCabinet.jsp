@@ -66,6 +66,7 @@
                     </label>
                 </div>
                 <div>  <i><b>${errorFillOrder}</b></i> </div>
+                <div><i><b>${bill}</b></i></div>
             </div>
             <div class="col-4">
                 <input name="carType" type="login" class="form-control" id="inputCarType" placeholder="Марка авто">
@@ -73,6 +74,7 @@
             <div class="col-2">
                 <input type="submit" class="btn btn-primary mb-3" value="Зробити замовлення">
             </div>
+
         </form>
         <div class="row">
                 <div class="col-1">

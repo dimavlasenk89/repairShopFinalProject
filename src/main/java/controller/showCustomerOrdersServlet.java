@@ -32,11 +32,14 @@ public class showCustomerOrdersServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String str = (String) session.getAttribute("cLogin");
+        String bill = (String) session.getAttribute("cBill");
         List<Integer> ListIds;
         ListIds = IdList(str);
         List<Orders> ListOrdersByCustomer = new ArrayList<>();
         ListIds.forEach(numberId -> ListOrdersByCustomer.add(selectOrder(numberId)));
         req.setAttribute("ListOrdersByCustomer", ListOrdersByCustomer);
+        req.setAttribute("bill", bill);
+        req.setAttribute("congratulations", str);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("userCabinet.jsp");
         requestDispatcher.forward(req, resp);
     }

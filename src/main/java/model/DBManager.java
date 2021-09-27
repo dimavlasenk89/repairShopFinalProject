@@ -11,7 +11,6 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 
 import static controller.Constants.*;
 
@@ -127,40 +126,7 @@ public Connection getConnection() throws SQLException {
         customer.setPassword(rs.getString(USER_PASSWORD_STRING));
         return customer;
     }
-    public String StringCustomers() {
-        String customers = CustomersList().toString();
-        return customers;
-    }
-    public String CustomersLogin() {
-        String input = StringCustomers();
-        Matcher matcher = LOCAL_LOGIN_PATTERN.matcher(input);
-        StringBuilder sb = new StringBuilder();
-        while (matcher.find()) {
-            sb.append(matcher.group());
-            sb.append("'");
-        }
-        return sb.toString();
-    }
-    public String[] CustomersLoginArray() {
-        String login = CustomersLogin();
-        String[] logins = LOCAL_SPLIT_PATTERN.split(login);
-        return logins;
-    }
-    public String CustomersPasswords() {
-        String input = StringCustomers();
-        Matcher matcher = LOCAL_PASSWORD_PATTERN.matcher(input);
-        StringBuilder sb = new StringBuilder();
-        while (matcher.find()) {
-            sb.append(matcher.group());
-            sb.append("'");
-        }
-        return sb.toString();
-    }
-    public String[] CustomersPasswordArray() {
-        String password = CustomersPasswords();
-        String[] passwords = LOCAL_SPLIT_PATTERN.split(password);
-        return passwords;
-    }
+
     public List<Orders> OrdersList() {
         List<Orders> OrdersList = new ArrayList<>();
         DBManager dbManager = DBManager.getInstance();

@@ -1,9 +1,5 @@
 package controller;
 
-import java.util.regex.Pattern;
-
-import static java.util.regex.Pattern.UNICODE_CHARACTER_CLASS;
-
 public class Constants {
     public static final String USER_LOGIN_STRING = "login";
     public static final String USER_ID_STRING = "id";
@@ -26,9 +22,6 @@ public class Constants {
     public static final String BAD_WORD = "some bad word";
     public static final String GET_ALL_CUSTOMERS = "SELECT * FROM repair_shop.customers ORDER BY id";
     public static final String SELECT_ALL_ORDERS = "SELECT * FROM repair_shop.orders ORDER BY id";
-    public static final Pattern LOCAL_LOGIN_PATTERN = Pattern.compile("(?<=').{1,20}(?=')", UNICODE_CHARACTER_CLASS);
-    public static final Pattern LOCAL_PASSWORD_PATTERN = Pattern.compile("(?<=\\.).{1,20}(?=\\.)", UNICODE_CHARACTER_CLASS);
-    public static final Pattern LOCAL_SPLIT_PATTERN = Pattern.compile("'");
     public static final String SQL_INSERT_CUSTOMER = "INSERT INTO customers VALUES (DEFAULT, ?, ?, ?)";
     public static final String SQL_ADD_NEW_ORDER = "INSERT INTO orders VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String SELECT_ALL_ORDERS_BY_MASTER_LOGIN = "select o.* from repair_shop.orders o, repair_shop.masters m " +
@@ -43,6 +36,7 @@ public class Constants {
     public static final String SELECT_ALL_ORDERS_BY_LOGIN = "select o.* from repair_shop.orders o, repair_shop.customers c " +
             "where o.CustomerLogin=c.login and c.login=";
     public static final String SELECT_MANAGER_BY_LOGIN = "SELECT id, login, password FROM repair_shop.managers where login=?";
+    public static final String SELECT_CUSTOMER_BY_LOGIN = "SELECT id, bill, login, password FROM repair_shop.customers where login=?";
     public static final String SELECT_MASTER_BY_LOGIN = "SELECT id, login, password, rating FROM repair_shop.masters where login=?";
     public static final String MASTER_DONE_ORDER = "UPDATE orders SET masterLogin=?, is_in_development='0', is_done='1' WHERE id=?";
     public static final String MASTER_UPDATE_ORDER = "UPDATE orders SET masterLogin=?, is_in_development='1' WHERE id=?";
