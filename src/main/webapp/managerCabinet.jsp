@@ -64,6 +64,8 @@
                         Відмінено
                     </label>
                 </div>
+                <div><i><b>${counterCurrent}</b></i></div>
+                <div><i><b>${counterTotal}</b></i></div>
                 <div>  <i><b>${errorFillOrder}</b></i> </div>
             </div>
             <div class="col-4">

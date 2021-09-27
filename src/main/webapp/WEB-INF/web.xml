@@ -23,6 +23,10 @@
 <!--        <servlet-name>addCustomerServlet</servlet-name>-->
     </filter-mapping>
 
+    <listener>
+        <listener-class>model.sessionListener</listener-class>
+    </listener>
+
 <!--    <filter>-->
 <!--        <filter-name>DublicateLoginFilter</filter-name>-->
 <!--        <filter-class>controller.filters.DublicateLoginFilter</filter-class>-->
