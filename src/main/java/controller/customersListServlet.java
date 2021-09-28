@@ -20,7 +20,7 @@ package controller;
         name = "/customersListServlet",
         urlPatterns = "/customersListServlet"
 )
-public class customersListServlet extends HttpServlet {
+public class customersListServlet extends HttpServlet { ;
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DBManager dbManager = DBManager.getInstance();
         List<Customer> ListCustomers = dbManager.CustomersList();
