@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+        <Configuration status="warn">
+
+
+    <Properties>
+
+    <Property name="basePath">/repairShop/logs</Property>
+
+    <Property name="layout">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Property>
+
+</Properties>
+
+
+    <Appenders>
+
+
+    <RollingFile name="fileLogger" filePattern="${basePath}/log-%d{yyyy-MM-dd}.log" fileName="${basePath}/logs.log">
+
+    <PatternLayout charset="UTF-8" pattern="${layout} "/>
+
+
+    <Policies>
+
+    <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+
+</Policies>
+
+</RollingFile>
+
+
+    <Console name="console" target="SYSTEM_OUT">
+
+    <PatternLayout charset="UTF-8" pattern="${layout}"/>
+
+</Console>
+
+</Appenders>
+
+
+    <Loggers>
+
+
+    <Logger name="repairShop" additivity="true" level="info">
+
+    <appender-ref level="info" ref="fileLogger"/>
+
+</Logger>
+
+
+    <Root additivity="false" level="trace">
+
+    <appender-ref ref="console"/>
+
+</Root>
+
+</Loggers>
+
+</Configuration>

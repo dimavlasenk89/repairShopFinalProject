@@ -2,6 +2,7 @@ package model;
 
 import model.entity.Customer;
 import model.entity.Orders;
+import org.apache.log4j.LogManager;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -19,6 +20,7 @@ import static controller.Constants.*;
  * Filled with low-level methods for getting databases data
  */
 public class DBManager {
+    public static org.apache.log4j.Logger LOG = LogManager.getLogger(DBManager.class);
 
     private static DBManager instance;
 
@@ -100,6 +102,7 @@ public Connection getConnection() throws SQLException {
             try {
                 ac.close();
             } catch (Exception e) {
+                LOG.error("Something went wrong in close method");
                 e.printStackTrace();
             }
         }
